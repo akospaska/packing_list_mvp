@@ -1,0 +1,160 @@
+<html>
+  <head>
+    <style>
+      @page {
+        size: A4;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 20px 0;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 12px 20px;
+        text-align: left;
+        vertical-align: middle;
+        font-size: 16px;
+        font-weight: 400;
+        color: #333;
+      }
+
+      th {
+        background-color: #f7f7f7;
+        font-size: 18px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-bottom: 2px solid #ddd;
+      }
+
+      td {
+        background-color: #fff;
+      }
+
+      tr:nth-child(even) {
+        background-color: #7b3838;
+      }
+
+      tr:nth-child(odd) {
+        background-color: #f2f2f2;
+      }
+
+      img {
+        width: auto;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Packing List</h1>
+    <table>
+      <tr>
+        <th>Order Number</th>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>SKU</th>
+        <th>Image</th>
+      </tr>
+      <script>
+        const orders = [
+          {
+            id: "gid://shopify/Order/5011494043874",
+            name: "#1013",
+            displayFinancialStatus: "PAID",
+            items: [
+              {
+                id: "gid://shopify/LineItem/12652111134946",
+                product: { id: "gid://shopify/Product/7878835011810" },
+                refundableQuantity: 1,
+                quantity: 1,
+                sku: "999",
+                name: "test t-shirt 1",
+                image: {
+                  id: "gid://shopify/ImageSource/30709748400354",
+                  url: "https://cdn.shopify.com/s/files/1/0611/4456/3938/products/2022-09-1319_47_20-_Fack-YuScottishMartialArtsFunnyT-Shirt_T-shirtforSalebyknightsydesign.png?v=1663096169",
+                },
+                __parentId: "gid://shopify/Order/5011494043874",
+              },
+            ],
+          },
+          {
+            id: "gid://shopify/Order/5057622704354",
+            name: "#1014",
+            displayFinancialStatus: "PAID",
+            items: [
+              {
+                id: "gid://shopify/LineItem/12743721976034",
+                product: { id: "gid://shopify/Product/7878835011810" },
+                refundableQuantity: 0,
+                quantity: 1,
+                sku: "999",
+                name: "test t-shirt 1",
+                image: {
+                  id: "gid://shopify/ImageSource/30709748400354",
+                  url: "https://cdn.shopify.com/s/files/1/0611/4456/3938/products/2022-09-1319_47_20-_Fack-YuScottishMartialArtsFunnyT-Shirt_T-shirtforSalebyknightsydesign.png?v=1663096169",
+                },
+                __parentId: "gid://shopify/Order/5057622704354",
+              },
+              {
+                id: "gid://shopify/LineItem/12743733510370",
+                product: { id: "gid://shopify/Product/7972593926370" },
+                refundableQuantity: 1,
+                quantity: 1,
+                sku: "900",
+                name: "asdasd",
+                image: {
+                  id: "gid://shopify/ImageSource/31277565214946",
+                  url: "https://cdn.shopify.com/s/files/1/0611/4456/3938/products/download.png?v=1670660409",
+                },
+                __parentId: "gid://shopify/Order/5057622704354",
+              },
+            ],
+          },
+        ];
+
+        for (const order of orders) {
+          const orderRow = document.createElement("tr");
+          const orderNumberCell = document.createElement("td");
+          orderNumberCell.textContent = order.name;
+          orderRow.appendChild(orderNumberCell);
+          orderRow.appendChild(document.createElement("td"));
+          orderRow.appendChild(document.createElement("td"));
+          orderRow.appendChild(document.createElement("td"));
+          orderRow.appendChild(document.createElement("td"));
+          document.querySelector("table").appendChild(orderRow);
+          for (const item of order.items) {
+            const itemRow = document.createElement("tr");
+            itemRow.appendChild(document.createElement("td"));
+            const productCell = document.createElement("td");
+            productCell.textContent = item.name;
+            itemRow.appendChild(productCell);
+            const quantityCell = document.createElement("td");
+            quantityCell.textContent = item.quantity;
+            itemRow.appendChild(quantityCell);
+            const skuCell = document.createElement("td");
+            skuCell.textContent = item.sku;
+            itemRow.appendChild(skuCell);
+            const imageCell = document.createElement("td");
+            if (item.image) {
+              const image = document.createElement("img");
+              image.src = item.image.url;
+              image.alt = item.name;
+              image.height = 100;
+              imageCell.appendChild(image);
+            }
+            itemRow.appendChild(imageCell);
+            document.querySelector("table").appendChild(itemRow);
+          }
+        }
+      </script>
+    </table>
+  </body>
+</html>
